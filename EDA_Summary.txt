@@ -1,0 +1,84 @@
+
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# -----------------------
+# 1. Load Dataset
+# -----------------------
+df = pd.read_csv("titanic.csv")  # Replace with your dataset
+print("Dataset Shape:", df.shape)
+
+# -----------------------
+# 2. Ask Meaningful Questions
+# -----------------------
+# - What is the survival rate?
+# - Does gender affect survival?
+# - Which age group has the highest survival?
+# - Are there missing values?
+
+# -----------------------
+# 3. Explore Data Structure
+# -----------------------
+print("\nColumns:", df.columns)
+print("\nData Info:")
+print(df.info())
+print("\nSummary Statistics:")
+print(df.describe())
+
+# Check for missing values
+print("\nMissing Values:\n", df.isnull().sum())
+
+# -----------------------
+# 4. Identify Patterns & Trends
+# -----------------------
+# Survival count
+plt.figure(figsize=(6,4))
+sns.countplot(data=df, x='Survived')
+plt.title('Survival Count')
+plt.show()
+
+# Survival by Gender
+plt.figure(figsize=(6,4))
+sns.countplot(data=df, x='Sex', hue='Survived')
+plt.title('Survival by Gender')
+plt.show()
+
+# Age Distribution
+plt.figure(figsize=(6,4))
+sns.histplot(df['Age'].dropna(), bins=30, kde=True)
+plt.title('Age Distribution')
+plt.show()
+
+# -----------------------
+# 5. Correlation Heatmap
+# -----------------------
+plt.figure(figsize=(8,6))
+sns.heatmap(df.corr(), annot=True, cmap='coolwarm')
+plt.title('Correlation Heatmap')
+plt.show()
+
+# -----------------------
+# 6. Detect Outliers
+# -----------------------
+plt.figure(figsize=(6,4))
+sns.boxplot(x=df['Age'])
+plt.title('Boxplot - Age')
+plt.show()
+
+# -----------------------
+# 7. Handle Missing Data
+# -----------------------
+missing = df.isnull().sum()
+print("\nColumns with Missing Data:\n", missing[missing > 0])
+
+# -----------------------
+# Save Summary Report
+# -----------------------
+with open("EDA_Summary.txt", "w") as f:
+    f.write("Shape: {}\n".format(df.shape))
+    f.write("Missing Values:\n{}\n".format(df.isnull().sum()))
+    f.write("Describe:\n{}\n".format(df.describe()))
+
+print("\nEDA Completed Successfully!")
