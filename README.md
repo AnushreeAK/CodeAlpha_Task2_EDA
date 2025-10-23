@@ -1,6 +1,3 @@
-# CodeAlpha_Task2_EDA
-<<<<<<< HEAD
-“Exploratory Data Analysis project for CodeAlpha internship.”
 # CodeAlpha Task 2: Exploratory Data Analysis (EDA)
 
 ## Overview
